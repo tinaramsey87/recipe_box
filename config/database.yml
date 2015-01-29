@@ -1,0 +1,9 @@
+development:
+  database: recipe_development
+  adapter: postgresql
+
+test:
+  database: recipe_test
+  adapter: postgresql
+
+  

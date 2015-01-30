@@ -1,0 +1,46 @@
+<h3> <%= @recipe.title %> </h3>
+<br>
+  <% @category.recipes.each() do |category| %>
+  <h4><%= category.title %></h4>
+  <% end %>
+<br>
+<% if @ingredients.any? %>
+  <ul>
+    <% @recipe.ingredients.each() do |ingredient| %>
+      <li><%= ingredient.name %> </li>
+    <% end %>
+  </ul>
+<% else %>
+<% end %>
+<br>
+<%= @recipe.instructions %>
+<br><br>
+
+<p>Select the ingredients needed for this recipe from the list below.</p>
+
+<form action='/ingredients/<%= @recipe.id %>' method='post'>
+  <label for='select_ingredient'>Select ingredient to add to the recipe:</label>
+  <input type="hidden" value="<%= @recipe.id %>">
+  <select type="text" name="ingredient_id">
+    <% @ingredients.each do |ingredient| %>
+      <option value="<%= ingredient.id %>"> <%= ingredient.name %> </option>
+    <% end %>
+  </select>
+  <button type="submit">Add Ingredient to Recipe</button>
+</form>
+
+<form action='/categories/<%= @recipe.id %>' method='post'>
+  <label for='select_category'>Select a category for this recipe:</label>
+  <input type="hidden" value="<%= @recipe.id %>">
+  <select type="text" name="category_id">
+    <% @categories.each do |category| %>
+      <option value="<%= category.id %>"><%= category.title %></option>
+    <% end %>
+  </select>
+  <button type="submit">Add Recipe to Category</button>
+</form>
+
+<form action="/recipes/<%= @recipe.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+<button type="submit">Delete Entire Recipe</button>
+</form>

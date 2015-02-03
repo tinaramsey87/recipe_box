@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="recipe-background">
   <div class="recipe-container">
 <h3> <%= @recipe.title %> </h3>
@@ -24,6 +25,13 @@
 <a href="/recipes/:id/rating/five"><span class="glyphicon glyphicon-star-empty"></span></a>
 </form>
 <% end %>
+=======
+<h3> <%= @recipe.title %> </h3>
+<br>
+  <% @category.recipes.each() do |category| %>
+  <h4><%= category.title %></h4>
+  <% end %>
+>>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
 <br>
 <% if @ingredients.any? %>
   <ul>
@@ -47,7 +55,11 @@
       <option value="<%= ingredient.id %>"> <%= ingredient.name %> </option>
     <% end %>
   </select>
+<<<<<<< HEAD
   <button type="submit" class="btn btn-sm btn-info">Add Ingredient to Recipe</button>
+=======
+  <button type="submit">Add Ingredient to Recipe</button>
+>>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
 </form>
 
 <form action='/categories/<%= @recipe.id %>' method='post'>
@@ -58,14 +70,23 @@
       <option value="<%= category.id %>"><%= category.title %></option>
     <% end %>
   </select>
+<<<<<<< HEAD
   <button type="submit" class="btn btn-sm btn-success">Add Recipe to Category</button>
+=======
+  <button type="submit">Add Recipe to Category</button>
+>>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
 </form>
 
 <form action="/recipes/<%= @recipe.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
+<<<<<<< HEAD
 <button type="submit" class="btn btn-med btn-danger">Delete Entire Recipe</button>
 </form>
 
 <a href="/">Return to Main Page</a>
   </div>
 </div>
+=======
+<button type="submit">Delete Entire Recipe</button>
+</form>
+>>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24

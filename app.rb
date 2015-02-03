@@ -35,6 +35,7 @@ post('/ingredients/add_ingredient') do
   redirect('ingredients/add_ingredient')
 end
 
+<<<<<<< HEAD
 get('/categories/add_category') do
 
   erb(:add_categories)
@@ -47,6 +48,8 @@ post('/categories/add_category') do
   redirect('/')
 end
 
+=======
+>>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
 get('/recipes/:id') do
   @recipe = Recipe.find(params["id"])
   @category = Category.find(params["id"])
@@ -69,7 +72,11 @@ post('/categories/:id') do
   category_id = params["category_id"]
   @category = Category.find(category_id.to_i)
   @recipe = Recipe.find(params["id"])
+<<<<<<< HEAD
   @recipe.categories << @category
+=======
+  @category.recipes << @recipes
+>>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
 
   redirect back
 end
@@ -79,3 +86,24 @@ delete('/recipes/:id') do
   @recipe.destroy()
   redirect('/')
 end
+<<<<<<< HEAD
+=======
+
+get('/ingredients/add_ingredient') do
+  @categories = Category.all
+
+  erb(:add_categories)
+end
+
+get('/categories/add_category') do
+
+  erb(:add_categories)
+end
+
+post('/categories/add_category') do
+  category = params["category"]
+  @category = Category.create({ :title => category })
+
+  redirect('categories/add_category')
+end
+>>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24

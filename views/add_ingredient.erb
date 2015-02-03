@@ -1,0 +1,20 @@
+<form action="/ingredients/add_ingredient" method="post">
+  <label for="ingredient">Ingredient:</label>
+  <input type="text" name="ingredient" id="ingredient">
+
+  <button type="submit">Add Ingredient</button>
+
+</form>
+<br>
+<h3>Here are the ingredients:</h3>
+<% if @ingredients.any? %>
+  <% @ingredients.each do |ingredient| %>
+  <ul>
+    <li><%= ingredient.name %></li>
+  </ul>
+  <% end %>
+<% else %>
+<p>There are no available ingredients yet.</p>
+<% end %>
+
+<a href="/">Return to Main Page</a>

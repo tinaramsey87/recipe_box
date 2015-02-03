@@ -1,0 +1,71 @@
+<div class="recipe-background">
+  <div class="recipe-container">
+<h3> <%= @recipe.title %> </h3>
+<br>
+<h4>This recipe is in the following categories:</h4>
+<% if @categories.any? %>
+  <% @recipe.categories.each() do |category| %>
+  <h5><%= category.title %></h5>
+  <% end %>
+<% end %>
+<br>
+<h4>Rating:</h4>
+<% if @recipe.rating %>
+  <% @recipe.rating.times do
+    <span class="glyphicon glyphicon-star"></span>
+  <% end %>
+<% else %>
+<h5>This recipe needs a rating:</h5>
+<form class="/recipes/:id/rating/" method="post">
+<a href="/recipes/:id/rating/one"><span class="glyphicon glyphicon-star-empty"></span></a>
+<a href="/recipes/:id/rating/two"><span class="glyphicon glyphicon-star-empty"></span></a>
+<a href="/recipes/:id/rating/three"><span class="glyphicon glyphicon-star-empty"></span></a>
+<a href="/recipes/:id/rating/four"><span class="glyphicon glyphicon-star-empty"></span></a>
+<a href="/recipes/:id/rating/five"><span class="glyphicon glyphicon-star-empty"></span></a>
+</form>
+<% end %>
+<br>
+<% if @ingredients.any? %>
+  <ul>
+    <% @recipe.ingredients.each() do |ingredient| %>
+      <li><%= ingredient.name %> </li>
+    <% end %>
+  </ul>
+<% else %>
+<% end %>
+<br>
+<%= @recipe.instructions %>
+<br><br>
+
+<p>Select the ingredients needed for this recipe from the list below.</p>
+
+<form action='/ingredients/<%= @recipe.id %>' method='post'>
+  <label for='select_ingredient'>Select ingredient to add to the recipe:</label>
+  <input type="hidden" value="<%= @recipe.id %>">
+  <select type="text" name="ingredient_id">
+    <% @ingredients.each do |ingredient| %>
+      <option value="<%= ingredient.id %>"> <%= ingredient.name %> </option>
+    <% end %>
+  </select>
+  <button type="submit" class="btn btn-sm btn-info">Add Ingredient to Recipe</button>
+</form>
+
+<form action='/categories/<%= @recipe.id %>' method='post'>
+  <label for='select_category'>Select a category for this recipe:</label>
+  <input type="hidden" value="<%= @recipe.id %>">
+  <select type="text" name="category_id">
+    <% @categories.each do |category| %>
+      <option value="<%= category.id %>"><%= category.title %></option>
+    <% end %>
+  </select>
+  <button type="submit" class="btn btn-sm btn-success">Add Recipe to Category</button>
+</form>
+
+<form action="/recipes/<%= @recipe.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+<button type="submit" class="btn btn-med btn-danger">Delete Entire Recipe</button>
+</form>
+
+<a href="/">Return to Main Page</a>
+  </div>
+</div>

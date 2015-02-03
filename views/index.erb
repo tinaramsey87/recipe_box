@@ -1,0 +1,18 @@
+<div class="edit-container">
+<h2>Here are the recipes:</h2>
+<% if @recipes.any? %>
+  <% @recipes.each do |recipe| %>
+    <ul>
+      <li><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>You need to add some recipes</p>
+<% end %>
+<br>
+<a href="/recipes/add_recipe">Add New Recipe</a>
+<br>
+<a href="/ingredients/add_ingredient">Add New Ingredients</a>
+<br>
+<a href="/categories/add_category">Add New Category</a>
+</div>

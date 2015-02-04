@@ -1,49 +1,42 @@
-<div class="recipe-background">
-  <div class="recipe-container">
+<h3><%= @recipe.title %></h3>
 
-    <h3> <%= @recipe.title %> </h3>
+<section id = "recipe_rating">
+  <h5>Rate this recipe:</h5>
+  <% 5.times do |i| %>
+    <% if i < @recipe.rating %>
+      <a href="/recipes/<%= @recipe.id %>/rate/<%= i+1 %>"><i class="fa fa-star"></i></a>
+    <% else %>
+      <a href="/recipes/<%= @recipe.id %>/rate/<%= i+1 %>"><i class="fa fa-star-o"></i></a>
+    <% end %>
+  <% end %>
+</section>
 
-    <br>
+<br>
 
-    <section id = "recipe_rating">
-      <h5>Rate this recipe:</h5>
-      <% 5.times do |i| %>
-        <% if i < @recipe.rating %>
-          <a href="/recipes/<%= @recipe.id %>/rate/<%= i+1 %>"><i class="fa fa-star"></i></a>
-        <% else %>
-          <a href="/recipes/<%= @recipe.id %>/rate/<%= i+1 %>"><i class="fa fa-star-o"></i></a>
-        <% end %>
+<section id="recipe_ingredients">
+<h5>Ingredients</h5>
+  <% if @recipe.ingredients.any? %>
+    <ul>
+      <% @recipe.ingredients.each() do |ingredient| %>
+        <li><%= ingredient.name %> </li>
       <% end %>
-    </section>
+    </ul>
+  <% else %>
+    No ingredients listed yet for this recipe.
+  <% end %>
+</section>
 
-    <br>
+<hr>
 
-    <section id="recipe_ingredients">
-    <h5>Ingredients</h5>
-      <% if @recipe.ingredients.any? %>
-        <ul>
-          <% @recipe.ingredients.each() do |ingredient| %>
-            <li><%= ingredient.name %> </li>
-          <% end %>
-        </ul>
-      <% else %>
-        No ingredients listed yet for this recipe.
-      <% end %>
-    </section>
+<section id = "recipe_instructions">
+  <h5>Instructions</h5>
+  <%= @recipe.instructions %>
+</section>
 
-    <br>
+<hr>
 
-    <section id = "recipe_instructions">
-      <h5>Instructions</h5>
-      <%= @recipe.instructions %>
-    </section>
+<a class="btn btn-med btn-warning" href="/recipes/<%= @recipe.id %>/edit">Edit this recipe</a>
 
-    <br>
+<hr>
 
-    <a class="btn btn-med btn-warning" href="/recipes/<%= @recipe.id %>/edit">Edit this recipe</a>
-    <br>
-
-    <a href="/">Return to Main Page</a>
-
-  </div>
-</div>
+<a href="/">Return to Main Page</a>

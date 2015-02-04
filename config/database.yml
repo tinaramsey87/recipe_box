@@ -1,9 +1,9 @@
 development:
   database: recipe_development
   adapter: postgresql
+  template: template0
 
 test:
   database: recipe_test
   adapter: postgresql
-
-  
+  template: template0

@@ -1,5 +1,5 @@
 body {
-  background-color: #E9A2CC;
+  background-color: #8C7AAE;
   background-position: center;
   background-attachment: fixed;
 
@@ -33,7 +33,7 @@ body {
 
 .edit-container {
   float: left;
-  background-color: rgba(216, 114, 172, 0.75);
+  background-color: #B6AACE;
   border: 3px double #8E1559;
   border-radius: 10px;
   max-width: 600px;
@@ -44,11 +44,10 @@ body {
 
 
 h1 {
-  color: #661141;
+  color: #18063A;
   text-align: justify;
   font-size: 75px;
   font-weight: bold;
-  text-decoration: underline;
 
 }
 
@@ -83,14 +82,26 @@ a:visited {
 }
 
 a:active {
-  
+
 }
 
 ul {
-
+  list-style: none;
+  margin: 0 0 1em 0;
+  padding: 0;
 }
 
 .form-group {
   font-weight: bold;
 
+}
+
+.btn-remove {
+  display: inline;
+  float: left;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  margin: 0 5px;
+  padding: 0;
 }

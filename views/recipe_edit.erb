@@ -1,0 +1,60 @@
+
+<section id="edit_recipe">
+
+  <section id="add_ingredients">
+    <p>Select the ingredients needed for this recipe from the list below.</p>
+    <form action='/ingredients/<%= @recipe.id %>' method='post'>
+      <label for='select_ingredient'>Select ingredient to add to the recipe:</label>
+      <input type="hidden" value="<%= @recipe.id %>">
+      <select type="text" name="ingredient_id">
+        <% @ingredients.each do |ingredient| %>
+          <option value="<%= ingredient.id %>"> <%= ingredient.name %> </option>
+        <% end %>
+      </select>
+      <button type="submit" class="btn btn-sm btn-info">Add Ingredient to Recipe</button>
+    </form>
+  </section>
+
+  <section id="edit_categories">
+    <form action='/categories/<%= @recipe.id %>' method='post'>
+      <label for='select_category'>Select a category for this recipe:</label>
+      <input type="hidden" value="<%= @recipe.id %>">
+      <select type="text" name="category_id">
+        <% @categories.each do |category| %>
+          <option value="<%= category.id %>"><%= category.title %></option>
+        <% end %>
+      </select>
+      <button type="submit" class="btn btn-sm btn-success">Add Recipe to Category</button>
+    </form>
+  </section>
+
+  <section id="delete_recipe">
+    <form action="/recipes/<%= @recipe.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-med btn-danger">Delete Entire Recipe</button>
+    </form>
+  </section>
+
+  <section id = "recipe_categories">
+    <h4>This recipe is in the following categories:</h4>
+    <% if @recipe.categories.any? %>
+      <ul>
+        <% @recipe.categories.each() do |category| %>
+          <li>
+            <form action="/categories/<%= category.id %>" method="post">
+              <input type="hidden" name="_method" value="patch">
+              <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
+              <button type="submit" class="btn-remove"><i class="fa fa-times"></i></button>
+            </form>
+
+
+            <a href="/categories/<%= category.id %>"><%= category.title %></a>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+    <p>This recipe isn't in a category yet.</p>
+    <% end %>
+  </section>
+
+</section>

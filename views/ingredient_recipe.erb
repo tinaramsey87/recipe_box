@@ -1,92 +1,48 @@
-<<<<<<< HEAD
 <div class="recipe-background">
   <div class="recipe-container">
-<h3> <%= @recipe.title %> </h3>
-<br>
-<h4>This recipe is in the following categories:</h4>
-<% if @categories.any? %>
-  <% @recipe.categories.each() do |category| %>
-  <h5><%= category.title %></h5>
-  <% end %>
-<% end %>
-<br>
-<h4>Rating:</h4>
-<% if @recipe.rating %>
-  <% @recipe.rating.times do
-    <span class="glyphicon glyphicon-star"></span>
-  <% end %>
-<% else %>
-<h5>This recipe needs a rating:</h5>
-<form class="/recipes/:id/rating/" method="post">
-<a href="/recipes/:id/rating/one"><span class="glyphicon glyphicon-star-empty"></span></a>
-<a href="/recipes/:id/rating/two"><span class="glyphicon glyphicon-star-empty"></span></a>
-<a href="/recipes/:id/rating/three"><span class="glyphicon glyphicon-star-empty"></span></a>
-<a href="/recipes/:id/rating/four"><span class="glyphicon glyphicon-star-empty"></span></a>
-<a href="/recipes/:id/rating/five"><span class="glyphicon glyphicon-star-empty"></span></a>
-</form>
-<% end %>
-=======
-<h3> <%= @recipe.title %> </h3>
-<br>
-  <% @category.recipes.each() do |category| %>
-  <h4><%= category.title %></h4>
-  <% end %>
->>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
-<br>
-<% if @ingredients.any? %>
-  <ul>
-    <% @recipe.ingredients.each() do |ingredient| %>
-      <li><%= ingredient.name %> </li>
-    <% end %>
-  </ul>
-<% else %>
-<% end %>
-<br>
-<%= @recipe.instructions %>
-<br><br>
 
-<p>Select the ingredients needed for this recipe from the list below.</p>
+    <h3> <%= @recipe.title %> </h3>
 
-<form action='/ingredients/<%= @recipe.id %>' method='post'>
-  <label for='select_ingredient'>Select ingredient to add to the recipe:</label>
-  <input type="hidden" value="<%= @recipe.id %>">
-  <select type="text" name="ingredient_id">
-    <% @ingredients.each do |ingredient| %>
-      <option value="<%= ingredient.id %>"> <%= ingredient.name %> </option>
-    <% end %>
-  </select>
-<<<<<<< HEAD
-  <button type="submit" class="btn btn-sm btn-info">Add Ingredient to Recipe</button>
-=======
-  <button type="submit">Add Ingredient to Recipe</button>
->>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
-</form>
+    <br>
 
-<form action='/categories/<%= @recipe.id %>' method='post'>
-  <label for='select_category'>Select a category for this recipe:</label>
-  <input type="hidden" value="<%= @recipe.id %>">
-  <select type="text" name="category_id">
-    <% @categories.each do |category| %>
-      <option value="<%= category.id %>"><%= category.title %></option>
-    <% end %>
-  </select>
-<<<<<<< HEAD
-  <button type="submit" class="btn btn-sm btn-success">Add Recipe to Category</button>
-=======
-  <button type="submit">Add Recipe to Category</button>
->>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
-</form>
+    <section id = "recipe_rating">
+      <h5>Rate this recipe:</h5>
+      <% 5.times do |i| %>
+        <% if i < @recipe.rating %>
+          <a href="/recipes/<%= @recipe.id %>/rate/<%= i+1 %>"><i class="fa fa-star"></i></a>
+        <% else %>
+          <a href="/recipes/<%= @recipe.id %>/rate/<%= i+1 %>"><i class="fa fa-star-o"></i></a>
+        <% end %>
+      <% end %>
+    </section>
 
-<form action="/recipes/<%= @recipe.id %>" method="post">
-  <input type="hidden" name="_method" value="delete">
-<<<<<<< HEAD
-<button type="submit" class="btn btn-med btn-danger">Delete Entire Recipe</button>
-</form>
+    <br>
 
-<a href="/">Return to Main Page</a>
+    <section id="recipe_ingredients">
+      <% if @recipe.ingredients.any? %>
+        <ul>
+          <% @recipe.ingredients.each() do |ingredient| %>
+            <li><%= ingredient.name %> </li>
+          <% end %>
+        </ul>
+      <% else %>
+        No ingredients listed yet for this recipe.
+      <% end %>
+    </section>
+
+    <br>
+
+    <section id = "recipe_instructions">
+      <h5>Instructions</h5>
+      <%= @recipe.instructions %>
+    </section>
+
+    <br>
+
+    <a class="btn btn-med btn-warning" href="/recipes/<%= @recipe.id %>/edit">Edit this recipe</a>
+    <br>
+
+    <a href="/">Return to Main Page</a>
+
   </div>
 </div>
-=======
-<button type="submit">Delete Entire Recipe</button>
-</form>
->>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24

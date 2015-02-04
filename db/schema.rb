@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20150203001937) do
-=======
-ActiveRecord::Schema.define(version: 20150129225618) do
->>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,10 +45,7 @@ ActiveRecord::Schema.define(version: 20150129225618) do
     t.text     "instructions"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
     t.integer  "rating"
-=======
->>>>>>> 4b5ac0c088cffdbc1def938ce6b6a8935ffa8a24
   end
 
 end

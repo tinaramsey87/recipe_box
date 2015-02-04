@@ -1,60 +1,98 @@
+<h3>Editing <%= @recipe.title %></h3>
 
 <section id="edit_recipe">
+  <form action='/recipes/<%= @recipe.id %>' method='post'>
+    <input type="hidden" name="_method" value="patch">
+    <div class="form-group">
+      <label for='recipe_title'>Edit Title:</label>
+      <input type='text' name='recipe_title' id='recipe_title' value="<%= @recipe.title %>">
+    </div>
+    <div class="form-group">
+      <label for="instructions">Edit Instructions:</label>
+      <textarea class="form-control" rows="5" name="instructions" id="instructions"><%= @recipe.instructions %></textarea>
+    </div>
+    <button type="submit" class="btn btn-sm btn-warning">Edit Recipe</button>
+  </form>
+</section>
 
-  <section id="add_ingredients">
-    <p>Select the ingredients needed for this recipe from the list below.</p>
-    <form action='/ingredients/<%= @recipe.id %>' method='post'>
-      <label for='select_ingredient'>Select ingredient to add to the recipe:</label>
-      <input type="hidden" value="<%= @recipe.id %>">
-      <select type="text" name="ingredient_id">
-        <% @ingredients.each do |ingredient| %>
-          <option value="<%= ingredient.id %>"> <%= ingredient.name %> </option>
-        <% end %>
-      </select>
-      <button type="submit" class="btn btn-sm btn-info">Add Ingredient to Recipe</button>
-    </form>
-  </section>
+<hr>
 
-  <section id="edit_categories">
-    <form action='/categories/<%= @recipe.id %>' method='post'>
-      <label for='select_category'>Select a category for this recipe:</label>
-      <input type="hidden" value="<%= @recipe.id %>">
-      <select type="text" name="category_id">
-        <% @categories.each do |category| %>
-          <option value="<%= category.id %>"><%= category.title %></option>
-        <% end %>
-      </select>
-      <button type="submit" class="btn btn-sm btn-success">Add Recipe to Category</button>
-    </form>
-  </section>
-
-  <section id="delete_recipe">
-    <form action="/recipes/<%= @recipe.id %>" method="post">
-      <input type="hidden" name="_method" value="delete">
-      <button type="submit" class="btn btn-med btn-danger">Delete Entire Recipe</button>
-    </form>
-  </section>
-
-  <section id = "recipe_categories">
-    <h4>This recipe is in the following categories:</h4>
-    <% if @recipe.categories.any? %>
+<section id="add_ingredients">
+  <section>
+    <h5>Ingredients</h5>
+    <% if @recipe.ingredients.any? %>
       <ul>
-        <% @recipe.categories.each() do |category| %>
+        <% @recipe.ingredients.each() do |ingredient| %>
           <li>
-            <form action="/categories/<%= category.id %>" method="post">
+            <form action="/ingredients/<%= ingredient.id %>" method="post">
               <input type="hidden" name="_method" value="patch">
               <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
               <button type="submit" class="btn-remove"><i class="fa fa-times"></i></button>
             </form>
-
-
-            <a href="/categories/<%= category.id %>"><%= category.title %></a>
+            <a href="/ingredients/<%= ingredient.id %>"><%= ingredient.name %></a>
           </li>
         <% end %>
       </ul>
     <% else %>
-    <p>This recipe isn't in a category yet.</p>
+      No ingredients listed yet for this recipe.
     <% end %>
   </section>
 
+  <p>Select additional ingredients needed for this recipe from the list below.</p>
+  <form action='/ingredients/<%= @recipe.id %>' method='post'>
+    <label for='select_ingredient'>Select ingredient to add to the recipe:</label>
+    <input type="hidden" value="<%= @recipe.id %>">
+    <select type="text" name="ingredient_id">
+      <% @ingredients.each do |ingredient| %>
+        <% if ! @recipe.ingredients.include?(ingredient) %>
+          <option value="<%= ingredient.id %>"> <%= ingredient.name %> </option>
+        <% end %>
+      <% end %>
+    </select>
+    <button type="submit" class="btn btn-sm btn-info">Add Ingredient to Recipe</button>
+  </form>
+</section>
+
+<hr>
+
+<section id = "recipe_categories">
+  <h4>This recipe is in the following categories:</h4>
+  <% if @recipe.categories.any? %>
+    <ul>
+      <% @recipe.categories.each() do |category| %>
+        <li>
+          <form action="/categories/<%= category.id %>" method="post">
+            <input type="hidden" name="_method" value="patch">
+            <input type="hidden" name="recipe_id" value="<%= @recipe.id %>">
+            <button type="submit" class="btn-remove"><i class="fa fa-times"></i></button>
+          </form>
+          <a href="/categories/<%= category.id %>"><%= category.title %></a>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+  <p>This recipe isn't in a category yet.</p>
+  <% end %>
+</section>
+
+<section id="edit_categories">
+  <form action='/categories/<%= @recipe.id %>' method='post'>
+    <label for='select_category'>Select a category for this recipe:</label>
+    <input type="hidden" value="<%= @recipe.id %>">
+    <select type="text" name="category_id">
+      <% @categories.each do |category| %>
+        <option value="<%= category.id %>"><%= category.title %></option>
+      <% end %>
+    </select>
+    <button type="submit" class="btn btn-sm btn-success">Add Recipe to Category</button>
+  </form>
+</section>
+
+<hr>
+
+<section id="delete_recipe">
+  <form action="/recipes/<%= @recipe.id %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn btn-med btn-danger">Delete Entire Recipe</button>
+  </form>
 </section>

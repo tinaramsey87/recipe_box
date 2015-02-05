@@ -1,3 +1,7 @@
+<% content_for :current_menu_thingy do %>
+  Menu
+<% end %>
+
 <h2>Recipes</h2>
 <% if @recipes.any? %>
   <% @recipes.each do |recipe| %>
@@ -8,9 +12,3 @@
 <% else %>
   <p>You need to add some recipes</p>
 <% end %>
-<br>
-<a href="/recipes/add_recipe">Add New Recipe</a>
-<br>
-<a href="/ingredients/add_ingredient">Add New Ingredients</a>
-<br>
-<a href="/categories/add_category">Add New Category</a>

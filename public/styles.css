@@ -64,6 +64,10 @@ body {
 
 }
 
+.instruction-box {
+  width: 70%;
+}
+
 /*.recipe-background {
   float: left;
   background-image: url('/img/recipecard.png');
@@ -131,6 +135,8 @@ ul {
   font-weight: bold;
 
 }
+
+
 
 .btn-remove {
   display: inline;

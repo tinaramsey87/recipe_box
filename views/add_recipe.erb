@@ -1,13 +1,37 @@
-<div class="container">
-<form action='/recipes/add_recipe' method='post'>
-  <label for='recipe_title'>Enter a title for a recipe:</label>
-  <input type='text' name='recipe_title' id='recipe_title' placeholder="Recipe Title">
-  <br>
+<% content_for :current_menu_thingy do %>
+  Recipes
+<% end %>
 
-  <label for='recipe_instructions'>Enter instructions for your recipe:</label>
-  <textarea rows='7' name='recipe_instructions' id='recipe_instructions' placeholder="Enter recipe instructions"></textarea>
-  <button type='submit'>Add recipe</button>
-</form>
-</div>
+<section id="recipe_list">
+  <h2>Recipes</h2>
+  <% if @recipes.any? %>
+    <% @recipes.each do |recipe| %>
+      <ul>
+        <li><a href="/recipes/<%= recipe.id %>"><%= recipe.title %></a></li>
+      </ul>
+    <% end %>
+  <% else %>
+    <p>You need to add some recipes</p>
+  <% end %>
+</section>
+
+<hr>
+
+
+
+<section>
+  <form action='/recipes' method='post'>
+    <div class="form-group">
+      <label for='recipe_title'>Enter a title for a recipe:</label>
+      <input type='text' name='recipe_title' id='recipe_title' placeholder="Recipe Title">
+    </div>
+    <div class="form-group">
+      <label for='recipe_instructions'>Enter instructions for your recipe:</label>
+      <br>
+        <textarea class="form-control instruction-box" rows='5' name='recipe_instructions' id='recipe_instructions' placeholder="Enter recipe instructions"></textarea>
+    </div>
+    <button type='submit'>Add recipe</button>
+  </form>
+</section>
 
 <a href="/">Return to Main Page</a

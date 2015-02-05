@@ -1,3 +1,7 @@
+<% content_for :current_menu_thingy do %>
+  Recipes - Edit
+<% end %>
+
 <h3>Editing <%= @recipe.title %></h3>
 
 <section id="edit_recipe">
@@ -9,7 +13,7 @@
     </div>
     <div class="form-group">
       <label for="instructions">Edit Instructions:</label>
-      <textarea class="form-control" rows="5" name="instructions" id="instructions"><%= @recipe.instructions %></textarea>
+      <textarea class="form-control instruction-box" rows="5" name="instructions" id="instructions"><%= @recipe.instructions %></textarea>
     </div>
     <button type="submit" class="btn btn-sm btn-warning">Edit Recipe</button>
   </form>

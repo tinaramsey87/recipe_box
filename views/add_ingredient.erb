@@ -1,4 +1,8 @@
-<form action="/ingredients/add_ingredient" method="post">
+<% content_for :current_menu_thingy do %>
+  Ingredients
+<% end %>
+
+<form action="/ingredients" method="post">
   <label for="ingredient">Ingredient:</label>
   <input type="text" name="ingredient" id="ingredient">
 

@@ -9,12 +9,13 @@ get ('/') do
   erb(:index)
 end
 
-get('/recipes/add_recipe') do
-
+get('/recipes') do
+  @recipes = Recipe.all
+  
   erb(:add_recipe)
 end
 
-post('/recipes/add_recipe') do
+post('/recipes') do
   recipe_title = params["recipe_title"]
   recipe_instructions = params["recipe_instructions"]
   @recipe = Recipe.create({ :title => recipe_title, :instructions => recipe_instructions, :rating => 0 })
@@ -22,31 +23,26 @@ post('/recipes/add_recipe') do
   redirect('/')
 end
 
-get('/ingredients/add_ingredient') do
+get('/ingredients') do
   @ingredients = Ingredient.all
 
   erb(:add_ingredient)
 end
 
-post('/ingredients/add_ingredient') do
+post('/ingredients') do
   ingredient = params["ingredient"]
   @ingredient = Ingredient.create({ :name => ingredient })
 
-  redirect('ingredients/add_ingredient')
-end
-
-get('/categories/add_category') do
-
-  erb(:add_categories)
+  redirect('/ingredients')
 end
 
 get('/categories') do
   @categories = Category.all
 
-  erb(:categories)
+  erb(:add_categories)
 end
 
-post('/categories/add_category') do
+post('/categories') do
   category_title = params["category_title"]
   @category = Category.create({ :title => category_title })
 
@@ -61,6 +57,14 @@ get('/recipes/:id') do
   erb(:ingredient_recipe)
 end
 
+get('/recipes/:id/edit') do
+  @recipe = Recipe.find(params["id"])
+  @ingredients = Ingredient.all()
+  @categories = Category.all()
+
+  erb(:recipe_edit)
+end
+
 patch '/recipes/:id' do
   recipe = Recipe.find(params['id'])
   recipe_title = params['recipe_title']
@@ -68,14 +72,6 @@ patch '/recipes/:id' do
   recipe.update(title: recipe_title, instructions: instructions)
 
   redirect back
-end
-
-get('/recipes/:id/edit') do
-  @recipe = Recipe.find(params["id"])
-  @ingredients = Ingredient.all()
-  @categories = Category.all()
-
-  erb(:recipe_edit)
 end
 
 get '/recipes/:id/rate/:rating' do
@@ -130,22 +126,4 @@ delete('/recipes/:id') do
   @recipe = Recipe.find(params['id'])
   @recipe.destroy()
   redirect('/')
-end
-
-get('/ingredients/add_ingredient') do
-  @categories = Category.all
-
-  erb(:add_categories)
-end
-
-get('/categories/add_category') do
-
-  erb(:add_categories)
-end
-
-post('/categories/add_category') do
-  category = params["category"]
-  @category = Category.create({ :title => category })
-
-  redirect('categories/add_category')
 end
